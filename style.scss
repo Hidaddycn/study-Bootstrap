@@ -1,0 +1,31 @@
+@import "functions";
+ @import "variables";
+ @for $i from 1 through 10{
+     .grid-#{$i}{
+         background-color: $blue-600;
+     }
+ }
+div{
+    background-color: $blue-900;
+}
+$str : str-index(body,od);
+p{
+    line-height: $str;
+}
+
+$colors: red green white,yellow blue black,cyan magenta gray;
+@each $i,$v ,$p in $colors{
+    .gs-#{$v}{
+        border:1px solid $v;
+    }
+}
+div{
+    color:if(null,green,red);
+    margin-left:map-get( $negative-spacers, "n1");
+    border:1px solid red;
+}
+
+body{
+    color:$body-color;
+    font-size: 46px;
+}

@@ -4,6 +4,7 @@
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
 // Color system
+//颜色变量系列
 
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
@@ -14,10 +15,11 @@ $gray-500: #adb5bd !default;
 $gray-600: #6c757d !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
-$gray-900: #212529 !default;
+$gray-900: #29323b !default;
 $black:    #000 !default;
 
 // fusv-disable
+//采用Maps数据类型定义了$grays
 $grays: (
   "100": $gray-100,
   "200": $gray-200,
@@ -29,6 +31,7 @@ $grays: (
   "800": $gray-800,
   "900": $gray-900
 ) !default;
+//以上是亮度颜色信息
 // fusv-enable
 
 $blue:    #0d6efd !default;
@@ -43,6 +46,7 @@ $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 
 // scss-docs-start colors-map
+//采用Maps数据结构定义了$colors
 $colors: (
   "blue":       $blue,
   "indigo":     $indigo,
@@ -83,6 +87,7 @@ $theme-colors: (
 // scss-docs-end theme-colors-map
 
 // Set a specific jump point for requesting color jumps
+//设置跳转点，作用不清楚
 $theme-color-interval: 8% !default;
 
 // The contrast ratio to reach against white, to determine if color changes from "light" to "dark". Acceptable values for WCAG 2.0 are 3, 4.5 and 7.
@@ -94,6 +99,21 @@ $color-contrast-dark:      $gray-900 !default;
 $color-contrast-light:     $white !default;
 
 // fusv-disable
+//函数tint-color定义在_functions.scss文件142-144行，代码如下，返回一个颜色函数，这个颜色函数将2个颜色合并，
+//蓝色越来越深，从纯蓝
+//前2个参数分别是2个颜色，第三个参数是第一个颜色参数的混合比例，如8 * 8% ，第一种颜色将作为0.64的比例混合
+//@function tint-color($color, $level) {
+ //   @return mix(white, $color, $level * $theme-color-interval);
+//}
+//需要注意的是，函数文件的引入，需要在变量之前。一些变量使用了函数，而函数在Sass中不存在提升现象。
+/*
+shade-color函数定义在—_functions.scss文档第145-148行
+@function shade-color($color, $level) {
+  @return mix(black, $color, $level * $theme-color-interval);
+}
+应用一个mix()内建颜色函数，将黑色和蓝色混合
+黑色的比例从低到高，颜色会越来越深
+*/
 $blue-100: tint-color($blue, 8) !default;
 $blue-200: tint-color($blue, 6) !default;
 $blue-300: tint-color($blue, 4) !default;
@@ -103,7 +123,7 @@ $blue-600: shade-color($blue, 2) !default;
 $blue-700: shade-color($blue, 4) !default;
 $blue-800: shade-color($blue, 6) !default;
 $blue-900: shade-color($blue, 8) !default;
-
+//紫色颜色的混合，如上面蓝色
 $indigo-100: tint-color($indigo, 8) !default;
 $indigo-200: tint-color($indigo, 6) !default;
 $indigo-300: tint-color($indigo, 4) !default;
@@ -196,6 +216,11 @@ $cyan-900: shade-color($cyan, 8) !default;
 // fusv-enable
 
 // Characters which are escaped by the escape-svg function
+//定义了一个list数据类型，是不是通过escape-svg function 来转义字符？
+//在_functions.scss70-90行定义了escape-svg 函数
+/*
+
+*/
 $escaped-characters: (
   ("<","%3c"),
   (">","%3e"),
@@ -207,7 +232,7 @@ $escaped-characters: (
 // Options
 //
 // Quickly modify global styling by enabling or disabling optional features.
-
+//快速修改全局样式 通过启用或者禁止可选功能
 $enable-caret:                true !default;
 $enable-rounded:              true !default;
 $enable-shadows:              false !default;
@@ -218,18 +243,20 @@ $enable-grid-classes:         true !default;
 $enable-button-pointers:      true !default;
 $enable-rfs:                  true !default;
 $enable-validation-icons:     true !default;
-$enable-negative-margins:     false !default;
+$enable-negative-margins:     true !default; //xiugai
 $enable-deprecation-messages: true !default;
 $enable-important-utilities:  true !default;
 
 
 // Spacing
+//空间
 //
 // Control the default styling of most Bootstrap elements by modifying these
 // variables. Mostly focused on spacing.
 // You can add more entries to the $spacers map, should you need more variation.
 
 $spacer: 1rem !default;
+//定义了一个$spacers maps数据
 $spacers: (
   0: 0,
   1: $spacer / 4,
@@ -238,25 +265,30 @@ $spacers: (
   4: $spacer * 1.5,
   5: $spacer * 3,
 ) !default;
-
+//一个if()内建函数，第一个参数是一个表达式，预期为true or false ? true则返回第一个，false返回第3个参数
+//negativify-map函数定义在_functions.scss第31-39行，将一个maps数据传入,默认情况下第一个参数在本页246设置了false
+//所以这个if函数返回了null.当我们修改了第一个参数为true,就会返回第一个参数，即negativify-map这个函数
+//这个函数会返回一个maps数据，这个数据中是带有负值的
 $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) !default;
 
 // Body
 //
 // Settings for the `<body>` element.
-
+//设置body元素
 $body-bg:                   $white !default;
 $body-color:                $gray-900 !default;
 $body-text-align:           null !default;
 
 
 // Links
+//链接
 //
 // Style anchor elements.
 
 $link-color:                              $primary !default;
 $link-decoration:                         underline !default;
 $link-hover-color:                        darken($link-color, 15%) !default;
+//darken（）是一个内建颜色函数，将会将第一个参数的颜色变暗，第二个参数指定变暗的幅度
 $link-hover-decoration:                   null !default;
 // Darken percentage for links with `.text-*` class (e.g. `.text-success`)
 $emphasized-link-hover-darken-percentage: 15% !default;
@@ -287,8 +319,8 @@ $grid-breakpoints: (
 ) !default;
 // scss-docs-end grid-breakpoints
 
-@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
-@include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
+//此处是我注释掉的@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+//此处是我注释掉的@include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
 
 
 // Grid containers
@@ -305,7 +337,7 @@ $container-max-widths: (
 ) !default;
 // scss-docs-end container-max-widths
 
-@include _assert-ascending($container-max-widths, "$container-max-widths");
+//此处是我注释掉的@include _assert-ascending($container-max-widths, "$container-max-widths");
 
 
 // Grid columns

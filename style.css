@@ -1,0 +1,67 @@
+@charset "UTF-8";
+/*
+shade-color函数定义在—_functions.scss文档第145-148行
+@function shade-color($color, $level) {
+  @return mix(black, $color, $level * $theme-color-interval);
+}
+应用一个mix()内建颜色函数，将黑色和蓝色混合
+黑色的比例从低到高，颜色会越来越深
+*/
+/*
+
+*/
+.grid-1 {
+  background-color: #0b5cd5; }
+
+.grid-2 {
+  background-color: #0b5cd5; }
+
+.grid-3 {
+  background-color: #0b5cd5; }
+
+.grid-4 {
+  background-color: #0b5cd5; }
+
+.grid-5 {
+  background-color: #0b5cd5; }
+
+.grid-6 {
+  background-color: #0b5cd5; }
+
+.grid-7 {
+  background-color: #0b5cd5; }
+
+.grid-8 {
+  background-color: #0b5cd5; }
+
+.grid-9 {
+  background-color: #0b5cd5; }
+
+.grid-10 {
+  background-color: #0b5cd5; }
+
+div {
+  background-color: #05285b; }
+
+p {
+  line-height: 2; }
+
+.gs-green {
+  border: 1px solid green; }
+
+.gs-blue {
+  border: 1px solid blue; }
+
+.gs-magenta {
+  border: 1px solid magenta; }
+
+div {
+  color: red;
+  margin-left: -0.25rem;
+  border: 1px solid red; }
+
+body {
+  color: #29323b;
+  font-size: 46px; }
+
+/*# sourceMappingURL=style.css.map */
