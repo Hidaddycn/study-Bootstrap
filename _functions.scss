@@ -1,3 +1,6 @@
+//这个混合器将会被在_variables.scss中被引用，位置在断点那一部分。
+//这个混合器的名称是sesert-断言 ascending 次序上升
+//更具网络文档https://segmentfault.com/a/1190000011040611 这个混合器的作用是保证上升排序，我暂时没有读懂
 @mixin _assert-ascending($map, $map-name) {
     $prev-key: null;
     $prev-num: null;
@@ -16,6 +19,8 @@
   
   // Starts at zero
   // Used to ensure the min-width of the lowest breakpoint starts at 0.
+  //这个混合器是和上面的混合器同时在_variables.scss中被调用，
+  //根据网落文档https://segmentfault.com/a/1190000011040611 这个是保证$grid-breakpoints 这个maps数据的第一项是0
   @mixin _assert-starts-at-zero($map, $map-name: "$grid-breakpoints") {
     @if length($map) > 0 {
       $values: map-values($map);
@@ -28,6 +33,7 @@
   
   // Internal Bootstrap function to turn maps into its negative variant.
   // It prefixes the keys with `n` and makes the value negative.
+  //这个函数在_variables.scss272可能被调用，因为这个函数作为if()函数的第2个参数，
   @function negativify-map($map) {
     $result: ();
     @each $key, $value in $map {

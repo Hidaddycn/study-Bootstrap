@@ -304,10 +304,12 @@ $paragraph-margin-bottom:   1rem !default;
 
 
 // Grid breakpoints
+//断点的设置，断点是根据媒体查询判断屏幕宽度，以改变布局
 //
 // Define the minimum dimensions at which your layout will change,
+//定义最小尺寸，当你的布局在改变的时候
 // adapting to different screen sizes, for use in media queries.
-
+//适应不同的屏幕宽度，根据屏幕媒体查询
 // scss-docs-start grid-breakpoints
 $grid-breakpoints: (
   xs: 0,
@@ -318,9 +320,15 @@ $grid-breakpoints: (
   xxl: 1400px
 ) !default;
 // scss-docs-end grid-breakpoints
-
-//此处是我注释掉的@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
-//此处是我注释掉的@include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
+//这里引用了2个mixin，那这2个mixins定义在那里？我们找到_mixins.scss这个文件，发现她也是通过@improt引入了不同
+//的文件，哪些文件都保存在一个名为mixins的子文件夹，但在mixins这个文件夹下没有发现，同时我发现，原以为这个文件下应该都是定义mixin,但同时也定义了一个function函数
+//眼下我们需要找出定义_assert-ascending这个混合器的地方，我们在_functions.scss这个文件里面发现了它们
+//其实也应该知道，bootstrap总文件引入顺序第一个functions,第二个是variables,
+//但凡varibale里面的@include能顺利执行，说明被引用的混合器肯定是定义在这个文件前面，也就只有function里面
+//如果_assert-ascending混合器定义在其他文件，而其他文件在未import的情况下，variables这里就会出错
+//这里推荐阅读文档https://segmentfault.com/a/1190000011040611
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
 
 
 // Grid containers
@@ -336,13 +344,14 @@ $container-max-widths: (
   xxl: 1320px
 ) !default;
 // scss-docs-end container-max-widths
-
-//此处是我注释掉的@include _assert-ascending($container-max-widths, "$container-max-widths");
+// container的最大宽度，引用的mixin位置参考上面
+@include _assert-ascending($container-max-widths, "$container-max-widths");
 
 
 // Grid columns
 //
 // Set the number of columns and specify the width of the gutters.
+//设置列的数量和槽的宽度
 
 $grid-columns:                12 !default;
 $grid-gutter-width:           1.5rem !default;
@@ -356,6 +365,7 @@ $container-padding-x: 1rem !default;
 
 
 // Components
+//组件
 //
 // Define common padding and border radius sizes and more.
 
