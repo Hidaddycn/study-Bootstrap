@@ -45,7 +45,9 @@ body{
       }
       $prev-key: $key;
       $prev-num: $num;
+     
     }
+    
   }
 
   $grid-breakpoints: (
@@ -56,23 +58,6 @@ body{
   xl: 1200px,
   xxl: 1400px
 ) !default;
+@include _assert-ascending($grid-breakpoints, 'grid-breakpoints')
 
   
-//   div{
-//     @include _assert-ascending($grid-breakpoints, '$grid-breakpoints');
-//       width:$prev-num;
-//   }
-
-  @mixin abc($map,$map-name:null){
-    $prev-key: null;
-    $prev-num: null;
-    @each $key ,$value in $map{
-        $prev-key: $key;
-      $prev-num: $value;
-    }
-  }
-
-  p{
-      @include abc($colors);
-      color:$prev-num;
-  }
