@@ -73,6 +73,9 @@ null，所以，在创建列的类名时，你将再也看不见“.col-xs-4”�
   
   // Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
   // Makes the @content apply to the given breakpoint and wider.
+  //@include 混合器的时候除了传入第一个参数外，还需在后面用{}，里面写符合判断条件的代码。
+  //如 @include media-breakpoints-up('md'){width:100px}
+  
   @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
     $min: breakpoint-min($name, $breakpoints);
     @if $min {
@@ -100,8 +103,8 @@ null，所以，在创建列的类名时，你将再也看不见“.col-xs-4”�
   // Media that spans multiple breakpoint widths.
   // Makes the @content apply between the min and max breakpoints
   @mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
-    $min: breakpoint-min($lower, $breakpoints);
-    $max: breakpoint-max($upper, $breakpoints);
+    $min: breakpoint-min($lower, $breakpoints);//获得传入key对应的value
+    $max: breakpoint-max($upper, $breakpoints);//获得传入key下一个成员的value -0.02
   
     @if $min != null and $max != null {
       @media (min-width: $min) and (max-width: $max) {

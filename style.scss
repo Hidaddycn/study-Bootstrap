@@ -1,5 +1,7 @@
 @import "functions";
  @import "variables";
+ @import "mixin/breakpoints";
+ @import "mixin/grid";
  @for $i from 1 through 10{
      .grid-#{$i}{
          background-color: $blue-600;
@@ -50,14 +52,16 @@ body{
     
   }
 
-  $grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-) !default;
-@include _assert-ascending($grid-breakpoints, 'grid-breakpoints')
 
-  
+
+
+  div{
+    @each $i in map-keys($grid-breakpoints){
+      @include media-breakpoint-up($i){background-color: red;};
+    }
+    
+    
+  }
+p{
+  @include make-row;
+}

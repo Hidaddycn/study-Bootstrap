@@ -10,6 +10,14 @@ shade-color函数定义在—_functions.scss文档第145-148行
 /*
 
 */
+  /*
+  核心函数，直接关系到类名的自动化生成。它的功能是利用前面breakpoint-min()函数，将断点名以“-name”的形式返回，即breakpoint-infix(“md”)
+  将返回“-md”，换句话说，这个函数的作用就是给断点名前头加个短横线，等到时候需要循环创建列的时候，就可以利用这个函数动态生成诸如”.col-md-4”
+  之类的类名了。
+
+在这个函数中有一个判断，即如果breakpoint-min()函数返回的值是null，那么整个函数将返回一个空字符串，而在min函数中，只有等级为“xs”时，才会返回
+null，所以，在创建列的类名时，你将再也看不见“.col-xs-4”，取而代之的是”.col-4”。在从b3迁移至b4的时候，这一点要尤其注意。
+  */
 .grid-1 {
   background-color: #0b5cd5; }
 
@@ -58,5 +66,32 @@ body {
   color: #29323b;
   font-size: 46px;
   background-color: #fff; }
+
+div {
+  background-color: red; }
+  @media (min-width: 576px) {
+    div {
+      background-color: red; } }
+  @media (min-width: 768px) {
+    div {
+      background-color: red; } }
+  @media (min-width: 992px) {
+    div {
+      background-color: red; } }
+  @media (min-width: 1200px) {
+    div {
+      background-color: red; } }
+  @media (min-width: 1400px) {
+    div {
+      background-color: red; } }
+
+p {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x) / -2);
+  margin-left: calc(var(--bs-gutter-x) / -2); }
 
 /*# sourceMappingURL=style.css.map */
